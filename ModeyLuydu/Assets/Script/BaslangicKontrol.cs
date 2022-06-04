@@ -101,8 +101,10 @@ public class BaslangicKontrol : MonoBehaviour
         
     }
 
+   
    public void panelAcKapa()
     {
         panel.SetActive(false);
+        RocketControl.sliderCalissinmi = true;
     }
 }

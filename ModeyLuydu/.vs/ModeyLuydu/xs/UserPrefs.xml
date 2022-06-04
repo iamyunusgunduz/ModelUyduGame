@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{84C9C42C-A3BE-5A9D-63AC-D4797B672E29}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/UyduControl.cs">
+    <Files>
+      <File FileName="Assets/Script/RocketControl.cs" Line="78" Column="118" />
+      <File FileName="Assets/Script/BaslangicKontrol.cs" Line="108" Column="47" />
+      <File FileName="Assets/Script/UyduControl.cs" Line="29" Column="46" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="0ea68d28-5530-4ac2-bf91-bc8403522d60" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
