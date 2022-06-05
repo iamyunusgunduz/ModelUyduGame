@@ -33,6 +33,9 @@ public class RocketControl : MonoBehaviour
 
     void Update()
     {
+        if (transform.position.y == 0) { YukseklikYazisi.text = "Roket kalktı -  \nRoket ayrıldı -  \nGörevYükü Ayrıldı - \nİrtifa Sabitleme - \nİniş Tamamlandı -"; }
+        if (transform.position.y > 0) { YukseklikYazisi.text = "Roket kalktı √  \nRoket ayrıldı -  \nGörevYükü Ayrıldı - \nİrtifa Sabitleme - \nİniş Tamamlandı -"; }
+
         if (transform.position.y < 0)
         {
             uyariMesaji.text = "Roket yok yoldu";
@@ -80,7 +83,7 @@ public class RocketControl : MonoBehaviour
 
         if (transform.position.y >700)
         {
-           
+
             uyariMesaji.text = "Başarılı bir ayrılma gerçekleştir !";
 
          
