@@ -1,12 +1,26 @@
-Satellite Communications dish
+Mobile Satellite control system.
 
-8740 tris, 1K normal map and 1K texture map.
+Satellite: 681 Polys
 
-Any questions drop me and email.
+Case: 72 Polys
 
-Enjoy!
+Laptop: 46 Polys
+
+4 X Texture maps .TIF:
+
+1 X Satellite Texture
+
+1 X Satellite Texture + Specular(Alpha)
+
+1 X Satellite Specular
+
+1 X Case/Laptop Texture
+
+ENJOY!
+
+Anything else you would like to change or customize please let me know!
+
 
 duane_mayberry@yahoo.co.uk
-
 
 www.duanesmind.co.uk

@@ -33,8 +33,8 @@ public class RocketControl : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.y == 0) { YukseklikYazisi.text = "Roket kalktı -  \nRoket ayrıldı -  \nGörevYükü Ayrıldı - \nİrtifa Sabitleme - \nİniş Tamamlandı -"; }
-        if (transform.position.y > 0) { YukseklikYazisi.text = "Roket kalktı √  \nRoket ayrıldı -  \nGörevYükü Ayrıldı - \nİrtifa Sabitleme - \nİniş Tamamlandı -"; }
+        if (transform.position.y == 0) { YukseklikYazisi.text = "Roket kalktı -"; }
+        if (transform.position.y > 0) { YukseklikYazisi.text = "Roket kalktı √\n"; }
 
         if (transform.position.y < 0)
         {
@@ -43,8 +43,20 @@ public class RocketControl : MonoBehaviour
         if (oyunDurumu)
         {
             roketCalissin();
+
         }
-        KalanHakText.text = "Kalan Hak : "+geriSAyim;
+        if (sliderCalissinmi)
+        {
+            KalanHakText.text = "Kalan Hak : " + geriSAyim;
+        }
+        else
+        {
+            KalanHakText.text = " ";
+      
+
+
+        }
+      
     
         if (sliderCalissinmi)
         {

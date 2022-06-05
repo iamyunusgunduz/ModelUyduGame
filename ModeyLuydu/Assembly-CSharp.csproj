@@ -63,8 +63,8 @@
     <Compile Include="Assets/Script/RocketControl.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets/Satellite Dish/info.txt" />
     <None Include="Assets/AurynSky/Rockets Missiles and Bombs/READ ME.txt" />
+    <None Include="Assets/Satellite Dish/Info.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
