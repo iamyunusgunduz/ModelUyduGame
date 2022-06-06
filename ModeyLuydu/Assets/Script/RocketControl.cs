@@ -5,129 +5,109 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class RocketControl : MonoBehaviour
 {
-    public Text YukseklikYazisi;
-
+   
+    int roketDurumu;
     public GameObject panel;
     public Text ButtonYazisiText;
     public Text uyariMesaji;
     public Text KalanHakText;
     public Text DegerSliderValueText;
-    public Slider MesafeSlider;
+  
+   
     public Slider DegerSlider;
   public static  bool sliderCalissinmi;
     int geriSAyim = 3;
     bool oyunDurumu;
-  
+    private Rigidbody rb;
     float speed = 0.0f;
 
     void Start()
     {
 
-
+        roketDurumu = 0;
         DegerSlider.value = 0;
         sliderCalissinmi = false;
         oyunDurumu = false;
-        uyariMesaji.text = "Maximum güç ile kalkış yapmayı dene !";
-  
+        uyariMesaji.text = "Başarılı kalkış yapmayı dene !";
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        if (transform.position.y == 0) { YukseklikYazisi.text = "Roket kalktı -"; }
-        if (transform.position.y > 0) { YukseklikYazisi.text = "Roket kalktı √\n"; }
 
-        if (transform.position.y < 0)
+
+        if (transform.position.y >= 700)
         {
-            uyariMesaji.text = "Roket yok yoldu";
+            roketDurumu = -1;
+        }
+        if (roketDurumu == -1 && transform.position.y<2)
+        {
+            roketDurumu = 0;
         }
         if (oyunDurumu)
         {
-            roketCalissin();
+            if (roketDurumu==1)
+            {
+                RoketYuksel();
+            }
+            if (roketDurumu==-1 && transform.position.y > 4)
+            {
+                RoketIn();
+            }
+            
 
+           
+         
         }
+        
+
+
         if (sliderCalissinmi)
         {
             KalanHakText.text = "Kalan Hak : " + geriSAyim;
-        }
-        else
-        {
-            KalanHakText.text = " ";
-      
-
-
-        }
-      
-    
-        if (sliderCalissinmi)
-        {
-            DegerSlider.value +=1;
+            DegerSlider.value ++ ;
             if (DegerSlider.value >= 100)
             {
-
                 --geriSAyim;
                 DegerSlider.value = 0;
-                if (geriSAyim == -1)
-                {
-                    panel.SetActive(true);
-                    geriSAyim = 3;
-                    DegerSlider.value = 0;
-                    sliderCalissinmi = false;
-
-                }
+                
             }
-        }
-        if (KalanHakText.text == "Kalan Hak : 0")
-        {
-            if (transform.position.y > 50 && transform.position.y < 470) { gameObject.transform.Rotate(0, 0, -0.3f); }
-        }
-        if (KalanHakText.text == "Kalan Hak : 3")
-        {
-            if (transform.position.y > 50 && transform.position.y < 170) { gameObject.transform.Rotate(0, 0, -0.3f); }
-        }
-        if (KalanHakText.text == "Kalan Hak : 2")
-        {
-            if (transform.position.y > 350 && transform.position.y < 670) { gameObject.transform.Rotate(0, 0, -0.3f); }
-        }
-        if (KalanHakText.text == "Kalan Hak : 1")
-        {
-            if (transform.position.y > 150 && transform.position.y < 370) { gameObject.transform.Rotate(0, 0, -0.3f); }
-        }
+            if (geriSAyim == -1)
+            {
+                panel.SetActive(true);
+                geriSAyim = 3;
+                DegerSlider.value = 0;
+                sliderCalissinmi = false;
 
-        if (transform.position.y >700)
-        {
-
-            uyariMesaji.text = "Başarılı bir ayrılma gerçekleştir !";
-
-         
-            
-        }
+            }
+        } else{  KalanHakText.text = " "; }
         
         DegerSliderValueText.text = DegerSlider.value + "";
     }
-   
 
-  
+
+   
+    
     public void degerSliderControl()
     {
        
           
-            if (DegerSlider.value >= 85) {
-            oyunDurumu = true;
-             
-            sliderCalissinmi = false;
-            uyariMesaji.text = "%" + DegerSlider.value + " Güç ile kalkış yaptın";
-      
+        if (DegerSlider.value >= 85)
+        {
            
-
+            oyunDurumu = true;
+            sliderCalissinmi = false;
+            uyariMesaji.text = "%" + DegerSlider.value + " itki ile kalkış yaptın";
+            roketDurumu = 1;
             Invoke("mesajSil", 1);
         }
         if (DegerSlider.value >= 50 && DegerSlider.value < 85)
         {
             uyariMesaji.text = "%" + DegerSlider.value + " itki yeterli değil ";
         }
-        if (DegerSlider.value >= 10 && DegerSlider.value < 50)
+        if (DegerSlider.value >= 0 && DegerSlider.value < 50)
         {
-            uyariMesaji.text = "%" + DegerSlider.value + " roket havalanamadı ";
+            uyariMesaji.text = "%" + DegerSlider.value + " itki ile roket havalanamadı ";
         }
 
 
@@ -135,29 +115,20 @@ public class RocketControl : MonoBehaviour
 
 
     }
-    public  void roketCalissin()
+
+  public void RoketYuksel()
     {
-        MesafeSlider.value = transform.position.y;
-
-        if (transform.position.y >= 0 && transform.position.y <= 700)
-        {
-            speed = DegerSlider.value;
-            Debug.Log("Debug: Speed "+speed);
-            transform.Translate(Vector3.up * speed * Time.deltaTime);
-            ButtonYazisiText.text = transform.position.y + "m";
-              
-
-            KalanHakText.text = "";
-
-            } else {
-           
-            speed = 1;
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            
-        }
-    
-            
+        speed = DegerSlider.value;
+        Debug.Log("Debug: Speed " + speed);
+        transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
+    public void RoketIn()
+    {
+        speed = 40;
+        Debug.Log("Debug: Speed " + speed);
+        transform.Translate(Vector3.down * speed * Time.deltaTime);
+    }
+
     public void mesajSil()
     {
         uyariMesaji.text = "  ";

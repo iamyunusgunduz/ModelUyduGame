@@ -8,6 +8,14 @@ TagManager:
   - Duvar
   - Uydu
   - Zemin
+  - SabitKalma
+  - UyduAyrilma
+  - TasiyiciAyrilma
+  - RoketAyrilma
+  - SabitKalmaCikis
+  - Yavaslama
+  - Tasiyici
+  - RoketBekleme
   layers:
   - Default
   - TransparentFX

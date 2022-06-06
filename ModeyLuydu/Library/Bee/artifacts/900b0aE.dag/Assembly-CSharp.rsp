@@ -343,6 +343,7 @@
 "Assets/Mountain Terrain/Misc/CameraDefault.cs"
 "Assets/Script/BaslangicKontrol.cs"
 "Assets/Script/RocketControl.cs"
+"Assets/Script/TasiyiciKontrol.cs"
 "Assets/Script/UyduControl.cs"
 "Assets/sprite muzzle flashes/AnimatedTexture.cs"
 -langversion:9.0
