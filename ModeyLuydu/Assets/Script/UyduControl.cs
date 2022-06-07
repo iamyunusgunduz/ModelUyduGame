@@ -1,38 +1,95 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 public class UyduControl : MonoBehaviour
 {
-    public Text ButtonYazisiText;
+    
     public Text mesafeSliderText;
+    public TMP_Text telemetriVerileri;
+    public TMP_Text uyariMesaji;
     public Text asamalarText;
-    public Text uyariMesaji;
+    
+
     public Slider MesafeSlider;
     private Rigidbody rb;
+    float donusSayisiHesaplamaIslemi=0;
     public GameObject tasiyicimiz;
+    float tasiyiciYukseklik;
     public GameObject roketKonum;
+    float lat, lon;
     public Slider DegerSlider;
     int speed;
-    int cikisValue=15;
+    float irtifaFarki;
+    int cikisValue=30;
+    int donusSayisi=0;
     bool donmeOlayi=false;
+    
     bool GorevBasladimi=false;
     bool asamaRoketBekleme = false;
     bool asamaRoketFirlatildi = false;
+    int inisHizi=0;
     bool asamaTasiyiciAyrildi = false;
     bool asamaUyduAyrildi = false;
     bool asamaUyduSabitkalmaBasladi = false;
     bool asamaUyduSabitkalmaTamamlandi = false;
+  
     bool asamaUyduYavaslamaBasladi = false;
+    int uyduPaketSayisi = 0;
+    string saat;
     bool asamaUyduInisTamamlandi = false;
     public GameObject gorevTamamlandiPaneli;
+   
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         asamalarText.text = "Roket beklemede (0m)";
         uyariMesaji.text = "Başarılı kalkış yapmayı dene !";
+        
     }
+    private void FixedUpdate()
+    {
 
+
+
+
+        inisHizi = speed;
+
+        irtifaFarki =MathF.Abs( (transform.position.y) - (tasiyiciYukseklik));
+        LocationInfo li = new LocationInfo();
+
+        lat = li.latitude;
+        lon = li.longitude;
+        if (tasiyicimiz.transform.position.y < 2)
+        {
+            tasiyiciYukseklik = 0;
+        }
+        else
+        {
+            tasiyiciYukseklik = tasiyicimiz.transform.position.y;
+        }
+        float pitchValue = transform.rotation.x;
+        float yawValue = transform.rotation.y;
+        float rollValue = transform.rotation.z;
+        saat = DateTime.Now.ToString("hh:MM:ss");
+        
+        telemetriVerileri.text = "Takım No: 12345\n" +
+"Paket Numarası : " + uyduPaketSayisi + "\n" +
+"Gönderme Saati : " + saat + "\n" +
+"Uydu Basınç : 144.1 mP\n" +
+"Taşıyıcı Basınç: 124.3 mP\n" +
+"Uydu Yükseklik: " + transform.position.y + "m\n" +
+"Taşıyıcı Yükseklik: " + tasiyiciYukseklik + "m\n" +
+"İrtifa Farkı: " + irtifaFarki + "m\n" +
+"İniş Hızı " + inisHizi + "m/s\n" +
+"Uydu Sicaklik :  30 °C\n" +
+"Pil Gerilimi: 4.1 V\n" +
+"Uydu Pitch: " + pitchValue + "\n" +
+"Uydu Roll : " + rollValue + "\n" +
+"Uydu Yaw : " + yawValue + "\n";
+    }
     void Update()
     {
         MesafeSlider.value = transform.position.y;
@@ -44,8 +101,8 @@ public class UyduControl : MonoBehaviour
         {
             GorevBasladimi = true;
             donmeOlayi = true;
-            speed = 75;
-            transform.Translate(Vector3.left * cikisValue * Time.deltaTime);
+            speed = 50;
+           
         }
         if (transform.position.y <=+0)
         {
@@ -53,7 +110,8 @@ public class UyduControl : MonoBehaviour
             donmeOlayi = false;
             
         }
-
+        
+       
         if (GorevBasladimi)
         {
                     if (asamaUyduSabitkalmaBasladi==false)
@@ -63,10 +121,10 @@ public class UyduControl : MonoBehaviour
           
                     if (donmeOlayi)
                     {
-                        gameObject.transform.Rotate(0.01f, 0.4f, 0);
-              
+                        gameObject.transform.Rotate(0, 5f, 0);
+         
 
-                    }
+            }
         }  else
         {
             transform.position = roketKonum.transform.position;
@@ -80,12 +138,14 @@ public class UyduControl : MonoBehaviour
             asamalarText.text = "Roket beklemede (0m)\n" +
             "Roket Kalkis Yapti(1m)\n";
             uyariMesaji.text = "Roket Kalkis Yapti(1m)";
+            uyduPaketSayisi++;
         }
         if (GorevBasladimi && transform.position.y <= 690)
         {
             asamalarText.text = "Roket beklemede (0m)\n" +
             "Roket Kalkis Yapti(1m)\n" +
     "Roket & Tasiyici Ayrildi(690m)\n";
+          
             uyariMesaji.text = "Roket & Tasiyici Ayrildi(690m)";
         }
         if (GorevBasladimi && transform.position.y <= 401)
@@ -98,10 +158,7 @@ public class UyduControl : MonoBehaviour
             uyariMesaji.text = "Tasiyici & Uydu Ayrildi(400m)";
         }
 
-        if (asamaTasiyiciAyrildi)
-        {
-            tasiyicimiz.transform.Translate(Vector3.left * 20 * Time.deltaTime);
-        }
+        
 
         if (GorevBasladimi && transform.position.y <= 201)
         {
@@ -172,6 +229,9 @@ public class UyduControl : MonoBehaviour
     "Görev Tamamlandı √\n" +
     "İniş Tamamlandi(0m)";
             uyariMesaji.text = "İniş Tamamlandi(0m)";
+            speed = 0;
+            donmeOlayi = false;
+            Invoke("oyunTamamlandi", 2);
         }
     }
 
@@ -183,4 +243,9 @@ public class UyduControl : MonoBehaviour
       
 
     }
+    public void oyunTamamlandi()
+    {
+        gorevTamamlandiPaneli.SetActive(true);
+    }
+   
 }

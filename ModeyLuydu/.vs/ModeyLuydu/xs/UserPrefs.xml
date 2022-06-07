@@ -1,15 +1,33 @@
 ﻿<Properties StartupConfiguration="{84C9C42C-A3BE-5A9D-63AC-D4797B672E29}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/RocketControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/UyduControl.cs">
     <Files>
-      <File FileName="Assets/Script/UyduControl.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/RocketControl.cs" Line="50" Column="14" />
-      <File FileName="Assets/Script/BaslangicKontrol.cs" />
-      <File FileName="Assets/Script/TasiyiciKontrol.cs" />
+      <File FileName="Assets/Script/UyduControl.cs" Line="21" Column="34" />
+      <File FileName="Assets/Script/SliderControl.cs" Line="60" Column="14" />
+      <File FileName="Assets/Script/BaslangicKontrol.cs" Line="8" Column="2" />
+      <File FileName="Assets/Script/TasiyiciKontrol.cs" Line="54" Column="3" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ModeyLuydu" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Script" expanded="True">
+                <Node name="UyduControl.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="Unity" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="09c313af-1eff-42f4-bead-984fbb37baa1" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="bb9b0b1b-ac8f-4b06-901e-00a15d9b18bc" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
